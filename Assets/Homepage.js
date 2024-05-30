@@ -1,6 +1,8 @@
 import { getTopTracks, searchWikipedia, getArtistImages } from "./api.js";
 
 async function loadPage() {
+    const spinner = document.getElementById("loading-spinner");
+    const playButton = document.getElementById("play-button");
     try {
         const tracks = await getTopTracks();
 
@@ -34,7 +36,6 @@ async function loadPage() {
         }
 
         // Set play button text to song and artist names
-        const playButton = document.getElementById("play-button");
         playButton.textContent = `${track.name} by ${track.artist}`;
         
         // Create an audio element
@@ -58,8 +59,13 @@ async function loadPage() {
 
         // Display the first Wikipedia search result
         displayWikiResult(wikiData, searchTerm);
+
+        // Hide spinner and show play button after everything is loaded
+        if (spinner) spinner.style.display = "none";
+        if (playButton) playButton.style.display = "block";
     } catch (error) {
         console.error('Failed to load page:', error);
+        if (spinner) spinner.style.display = "none";
     }
 }
 
@@ -167,7 +173,7 @@ document.querySelectorAll(".tooltip").forEach(button => {
     });
 });
 
-// Close modal on close button click
+// Close modal on close button click and reload page
 const closeModalButton = document.getElementById("closeModalButton");
 if (closeModalButton) {
     closeModalButton.addEventListener("click", function () {
@@ -175,5 +181,7 @@ if (closeModalButton) {
         if (modal) {
             modal.style.display = "none";
         }
+        location.reload(); // Reload the page
     });
 }
+
