@@ -3,6 +3,7 @@ import { getTopTracks, searchWikipedia, getArtistImages } from "./api.js";
 async function loadPage() {
     const spinner = document.getElementById("loading-spinner");
     const playButton = document.getElementById("play-button");
+
     try {
         const tracks = await getTopTracks();
 
@@ -13,19 +14,24 @@ async function loadPage() {
         let track;
         let attempts = 0;
         const maxAttempts = 10; // Maximum number of attempts to find a track with a valid preview URL
+        const playedTracks = JSON.parse(localStorage.getItem('playedTracks')) || [];
 
-        // Loop to find a track with a valid preview URL
+        // Loop to find a new track with a valid preview URL
         while (attempts < maxAttempts) {
             track = tracks[Math.floor(Math.random() * tracks.length)];
-            if (track.preview_url) {
+            if (track.preview_url && !playedTracks.includes(track.id)) {
                 break;
             }
             attempts++;
         }
 
-        if (!track.preview_url) {
-            throw new Error("No tracks with a valid preview URL found.");
+        if (!track.preview_url || playedTracks.includes(track.id)) {
+            throw new Error("No new tracks with a valid preview URL found.");
         }
+
+        // Save the track ID to local storage to mark it as played
+        playedTracks.push(track.id);
+        localStorage.setItem('playedTracks', JSON.stringify(playedTracks));
 
         // Get artist images
         const artistImages = await getArtistImages(track.artistIds);
@@ -149,6 +155,13 @@ function displayWikiResult(wikiData, searchTerm) {
     }
 }
 
+// Function to save user responses
+function saveUserResponse(rating) {
+    const responses = JSON.parse(localStorage.getItem('userResponses')) || [];
+    responses.push(rating);
+    localStorage.setItem('userResponses', JSON.stringify(responses));
+}
+
 // Load page content when the script runs
 loadPage();
 
@@ -163,9 +176,12 @@ function updateDateTime() {
 updateDateTime();
 setInterval(updateDateTime, 1000);
 
-// Display modal on button click
+// Display modal on button click and save user response
 document.querySelectorAll(".tooltip").forEach(button => {
     button.addEventListener("click", function () {
+        const rating = button.getAttribute("data-rating");
+        saveUserResponse(rating);
+        
         const modal = document.getElementById("myModal");
         if (modal) {
             modal.style.display = "block";
