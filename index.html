@@ -1,164 +1,109 @@
 <!DOCTYPE html>
 <html lang="en-US">
-	<head>
-		<meta charset="UTF-8" />
-		<title>Tasty Jams</title>
-		<link
-			rel="stylesheet"
-			href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.css"
-			integrity="sha512-t38vG/f94E72wz6pCsuuhcOPJlHKwPy+PY+n1+tJFzdte3hsIgYE7iEpgg/StngunGszVMrRfvwZinrza0vMTA=="
-			crossorigin="anonymous"
-			referrerpolicy="no-referrer" />
-		<link
-			rel="preconnect"
-			href="https://fonts.googleapis.com" />
-		<link
-			rel="preconnect"
-			href="https://fonts.gstatic.com"
-			crossorigin />
-		<link
-			href="https://fonts.googleapis.com/css2?family=Amatic+SC&family=Caveat&family=Hanken+Grotesk:wght@300&family=Lobster&family=Sigmar+One&display=swap"
-			rel="stylesheet" />
-		<script
-			src="https://cdn.jsdelivr.net/npm/dayjs@1.11.3/dayjs.min.js"
-			integrity="sha256-iu/zLUB+QgISXBLCW/mcDi/rnf4m4uEDO0wauy76x7U="
-			crossorigin="anonymous"></script>
-		<link
-			rel="stylesheet"
-			href="Assets/Style.css" />
-	</head>
+<head>
+    <meta charset="UTF-8" />
+    <title>Tasty Jams</title>
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.css"
+        integrity="sha512-t38vG/f94E72wz6pCsuuhcOPJlHKwPy+PY+n1+tJFzdte3hsIgYE7iEpgg/StngunGszVMrRfvwZinrza0vMTA=="
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Amatic+SC&family=Caveat&family=Hanken+Grotesk:wght@300&family=Lobster&family=Sigmar+One&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="Assets/Style.css" />
+    
+</head>
+<body>
+    <nav class="nav-wrapper" id="logo">
+        <div>
+            <img src="./Assets/TastyJams-Logo.png" alt="Logo" />
+            <span class="right" id="current-day"></span>
+        </div>
+    </nav>
 
-	<body>
-		<nav
-			class="nav-wrapper"
-			id="logo">
-			<div>
-				<img
-					src="./Assets/TastyJams-Logo.png"
-					alt="Logo" />
-				<span
-					class="right"
-					id="current-day"></span>
-			</div>
-		</nav>
+    <div class="modal container center-align" id="myModal">
+        <div class="modal-content">
+            <span class="close" id="closeModalButton">&times;</span>
+            <p>Thank you for your submission!</p>
+            <p><img id="modal-logo" src="./Assets/TastyJams-Logo.png" /></p>
+        </div>
+    </div>
 
-		<div
-			class="modal container center-align"
-			id="myModal">
-			<div class="modal-content">
-				<span
-					class="close"
-					id="closeModalButton"
-					>&times;</span
-				>
-				<p>Thank you for your submission!</p>
-				<p>
-					<img
-						id="modal-logo"
-						src="./Assets/TastyJams-Logo.png" />
-				</p>
-			</div>
-		</div>
+    <section class="container center-align">
+        <div class="row" id="main"></div>
+        <div id="background-image-container" class="col">
+            <div id="background-image"></div>
+            <button id="play-button"></i></button>
+        </div>
+    </section>
 
-		<section class="container center-align">
-			<div
-				class="row"
-				id="main"></div>
-			<div
-				id="background-image-container"
-				class="col">
-				<div id="background-image"></div>
-				<button id="play-button"></button>
-				<iframe
-					id="track-embed"
-					src=""
-					frameborder="0"
-					allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-					loading="lazy">
-				</iframe>
-			</div>
-		</section>
+    <section class="ratings center-align">
+        <div class="row">
+            <span id="question"> Spread Your Taste: </span>
+            <div class="buttons">
+                <div class="tooltip" id="btn1" data-rating="1">
+                    <span class="tooltiptext">Offensive</span>
+                    <span class="col rateMe">
+                        <img
+                            src="./Assets/tasty-toast-man2.png"
+                            alt="Tasty toast man button - rating: offensive"
+                            class="jamicon" />
+                    </span>
+                </div>
 
-		<section class="ratings center-align">
-			<div class="row">
-				<span id="question"> Spread Your Taste: </span>
-				<div class="buttons">
-					<div
-						class="tooltip"
-						id="btn1"
-						data-rating="1">
-						<span class="tooltiptext">Offensive</span>
-						<span class="col rateMe">
-							<img
-								src="./Assets/tasty-toast-man2.png"
-								alt="Tasty toast man button - rating: offensive"
-								class="jamicon" />
-						</span>
-					</div>
+                <div class="tooltip" id="btn2" data-rating="2">
+                    <span class="tooltiptext">Nasty</span>
+                    <span class="col rateMe">
+                        <img
+                            src="./Assets/tasty-toast-man2.png"
+                            alt="Tasty toast man button - rating: Nasty"
+                            class="jamicon" />
+                    </span>
+                </div>
+                <div class="tooltip" id="btn3" data-rating="3">
+                    <span class="tooltiptext">Meh</span>
+                    <span class="col rateMe">
+                        <img
+                            src="./Assets/tasty-toast-man2.png"
+                            alt="Tasty toast man button - rating: meh"
+                            class="jamicon" />
+                    </span>
+                </div>
+                <div class="tooltip" id="btn4" data-rating="4">
+                    <span class="tooltiptext">I'd eat it</span>
+                    <span class="col rateMe">
+                        <img
+                            src="./Assets/tasty-toast-man2.png"
+                            alt="Tasty toast man button - rating: I'd eat it"
+                            class="jamicon" />
+                    </span>
+                </div>
+                <div class="tooltip" id="btn5" data-rating="5">
+                    <span class="tooltiptext">Tasty!</span>
+                    <span class="col rateMe">
+                        <img
+                            src="./Assets/tasty-toast-man2.png"
+                            alt="Tasty toast man button - rating: Tasty!"
+                            class="jamicon"
+                            id="btn5" />
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div id="wikiButtonContainer"></div>
+    </section>
 
-					<div
-						class="tooltip"
-						id="btn2"
-						data-rating="2">
-						<span class="tooltiptext">Nasty</span>
-						<span class="col rateMe">
-							<img
-								src="./Assets/tasty-toast-man2.png"
-								alt="Tasty toast man button - rating: Nasty"
-								class="jamicon" />
-						</span>
-					</div>
-					<div
-						class="tooltip"
-						id="btn3"
-						data-rating="3">
-						<span class="tooltiptext">Meh</span>
-						<span class="col rateMe">
-							<img
-								src="./Assets/tasty-toast-man2.png"
-								alt="Tasty toast man button - rating: meh"
-								class="jamicon" />
-						</span>
-					</div>
-					<div
-						class="tooltip"
-						id="btn4"
-						data-rating="4">
-						<span class="tooltiptext">I'd eat it</span>
-						<span class="col rateMe">
-							<img
-								src="./Assets/tasty-toast-man2.png"
-								alt="Tasty toast man button - rating: I'd eat it"
-								class="jamicon" />
-						</span>
-					</div>
-					<div
-						class="tooltip"
-						id="btn5"
-						data-rating="5">
-						<span class="tooltiptext">Tasty!</span>
-						<span class="col rateMe">
-							<img
-								src="./Assets/tasty-toast-man2.png"
-								alt="Tasty toast man button - rating: Tasty!"
-								class="jamicon"
-								id="btn5" />
-						</span>
-					</div>
-				</div>
-			</div>
-			<div id="wikiButtonContainer"></div>
-		</section>
-
-		<script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
-		<script
-			src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.js"
-			integrity="sha512-m2PhLxj2N91eYrIGU2cmIu2d0SkaE4A14bCjVb9zykvp6WtsdriFCiXQ/8Hdj0kssUB/Nz0dMBcoLsJkSCto0Q=="
-			crossorigin="anonymous"
-			referrerpolicy="no-referrer"></script>
-
-		<script
-			src="Assets/Homepage.js"
-			type="module"></script>
-	</body>
+    
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.js"
+        integrity="sha512-m2PhLxj2N91eYrIGU2cmIu2d0SkaE4A14bCjVb9zykvp6WtsdriFCiXQ/8Hdj0kssUB/Nz0dMBcoLsJkSCto0Q=="
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer"></script>
+    <script src="Assets/Homepage.js" type="module"></script>
+</body>
 </html>
