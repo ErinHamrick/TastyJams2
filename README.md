@@ -12,10 +12,12 @@ This application was constructed using HTML, CSS, and JavaScript. For the CSS, w
 
 The Tasty Jams development team consists of Erin Hamrick, Paul Jang, Paul Allen, and Ethan Trudell. Much like the philosophy of the app itself, the development team took on a communal approach in the development of this application. While working together, separate branches were created to utilize the Git FLow methodology in order to fully experience the team approach to web development.
 
+** Note The original Tasty Jams site created by the above was cloned and the API updated by Erin Hamrick in order to recover functionality of the site. **
+
 ## Screenshot
 
 ![AltText](/Assets/TastyJamsScreenshot.png "Screenshot")
 
 ## Application Link
 
-https://erinhamrick.github.io/tasty-jams/
+https://erinhamrick.github.io/TastyJams2/
